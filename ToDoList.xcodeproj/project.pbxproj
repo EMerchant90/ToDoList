@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8FA732EA204DE02D004B28FC /* GroupingTVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA732E9204DE02D004B28FC /* GroupingTVController.swift */; };
 		8FC3613F20407D85002172BD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC3613E20407D85002172BD /* AppDelegate.swift */; };
 		8FC3614120407D85002172BD /* ToDoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC3614020407D85002172BD /* ToDoListViewController.swift */; };
 		8FC3614420407D85002172BD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8FC3614220407D85002172BD /* Main.storyboard */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8FA732E9204DE02D004B28FC /* GroupingTVController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupingTVController.swift; sourceTree = "<group>"; };
 		8FC3613B20407D85002172BD /* ToDoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FC3613E20407D85002172BD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8FC3614020407D85002172BD /* ToDoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListViewController.swift; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 		8FEE51E42047C784003E5191 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				8FA732E9204DE02D004B28FC /* GroupingTVController.swift */,
 				8FC3614020407D85002172BD /* ToDoListViewController.swift */,
 			);
 			path = Controller;
@@ -173,6 +176,7 @@
 			files = (
 				8FC3614120407D85002172BD /* ToDoListViewController.swift in Sources */,
 				8FE438502048AA270069A64B /* DataModel.xcdatamodeld in Sources */,
+				8FA732EA204DE02D004B28FC /* GroupingTVController.swift in Sources */,
 				8FC3613F20407D85002172BD /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
