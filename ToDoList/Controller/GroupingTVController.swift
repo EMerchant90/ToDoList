@@ -7,14 +7,14 @@
 //
 
 import UIKit
-import CoreData
+import RealmSwift
 
 class GroupingTVController: UITableViewController {
     
-    var groupingArray = [Grouping]()
+    let realm = try! Realm()
     
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-
+    var groupingArray: Results<Grouping>?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -25,7 +25,8 @@ class GroupingTVController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return groupingArray.count
+        
+        return groupingArray?.count ?? 1
         
     }
     
@@ -33,7 +34,7 @@ class GroupingTVController: UITableViewController {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
         
-        cell.textLabel?.text = groupingArray[indexPath.row].name
+        cell.textLabel?.text = groupingArray?[indexPath.row].name ?? "No Categories Added Yet"
         
         return cell
         
@@ -49,16 +50,18 @@ class GroupingTVController: UITableViewController {
         let destinationVC = segue.destination as! ToDoListViewController
         
         if let indexPath = tableView.indexPathForSelectedRow {
-            destinationVC.selectedCategory = groupingArray[indexPath.row]
+            destinationVC.selectedCategory = groupingArray?[indexPath.row]
         }
     }
     
     //MARK: - Model Manipulation Methods
     
-    func saveCategories() {
+    func save(groupingArray: Grouping) {
         
         do {
-            try context.save()
+            try realm.write {
+                realm.add(groupingArray)
+            }
         } catch {
             print("Error saving categories \(error)")
         }
@@ -68,13 +71,7 @@ class GroupingTVController: UITableViewController {
     
     func loadCategories() {
         
-        let request : NSFetchRequest<Grouping> = Grouping.fetchRequest()
-        
-        do {
-            groupingArray = try context.fetch(request)
-        } catch {
-            print("Error loading categories \(error)")
-        }
+        groupingArray = realm.objects(Grouping.self)
         
         tableView.reloadData()
     }
@@ -86,25 +83,22 @@ class GroupingTVController: UITableViewController {
         
         let alert = UIAlertController(title: "Add New Categories", message: "", preferredStyle: .alert)
         
-        let action = UIAlertAction(title: "Add Category", style: .default) { (action) in
+        let action = UIAlertAction(title: "Add", style: .default) { (action) in
             
-            let newCategory = Grouping(context: self.context)
+            let newCategory = Grouping()
             
             newCategory.name = textField.text!
             
-            self.groupingArray.append(newCategory)
-            
-            self.saveCategories()
+            self.save(groupingArray : newCategory)
         }
+
+        alert.addAction(action)
         
         alert.addTextField { (field) in
-            
-            field.placeholder = "Create new category"
-            
             textField = field
+            field.placeholder = "Create new category"
         }
         
-        alert.addAction(action)
         
         present(alert, animated: true, completion: nil)
         
