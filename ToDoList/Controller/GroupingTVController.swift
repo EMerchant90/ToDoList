@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class GroupingTVController: UITableViewController {
+class GroupingTVController: SwipeTableViewController {
     
     let realm = try! Realm()
     
@@ -32,7 +32,7 @@ class GroupingTVController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
+        let cell = super.tableView(tableView, cellForRowAt: indexPath)
         
         cell.textLabel?.text = groupingArray?[indexPath.row].name ?? "No Categories Added Yet"
         
@@ -46,7 +46,7 @@ class GroupingTVController: UITableViewController {
         performSegue(withIdentifier: "goToItems", sender: self)
     }
     
-    func preepare(for segue: UIStoryboardSegue, sender: Any?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destinationVC = segue.destination as! ToDoListViewController
         
         if let indexPath = tableView.indexPathForSelectedRow {
@@ -54,7 +54,7 @@ class GroupingTVController: UITableViewController {
         }
     }
     
-    //MARK: - Model Manipulation Methods
+    //MARK: - Data Manipulation Methods
     
     func save(groupingArray: Grouping) {
         
@@ -76,7 +76,22 @@ class GroupingTVController: UITableViewController {
         tableView.reloadData()
     }
     
-    //MARK: - Add New Items
+    //MARK: - Delete Data From Swipe
+    
+    override func updateModel(at indexPath: IndexPath) {
+        
+        if let categoryForDeletion = self.groupingArray?[indexPath.row]{
+            do {
+                try self.realm.write {
+                    self.realm.delete(categoryForDeletion)
+                }
+            } catch {
+                print("Error deleting category, \(error)")
+            }
+        }
+    }
+    
+    //MARK: - Add New Grouping
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
         
         var textField = UITextField()
@@ -104,8 +119,6 @@ class GroupingTVController: UITableViewController {
         
     }
     
-    
-    
-    
-    
 }
+
+
