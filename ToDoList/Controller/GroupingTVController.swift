@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import ChameleonFramework
 
 class GroupingTVController: SwipeTableViewController {
     
@@ -19,6 +20,8 @@ class GroupingTVController: SwipeTableViewController {
         super.viewDidLoad()
 
         loadCategories()
+        
+        tableView.separatorStyle = .none
     }
 
     //MARK: - Tableview Datasource Methods
@@ -34,7 +37,13 @@ class GroupingTVController: SwipeTableViewController {
         
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
         
-        cell.textLabel?.text = groupingArray?[indexPath.row].name ?? "No Categories Added Yet"
+        if let groupings = groupingArray?[indexPath.row] {
+            
+            cell.textLabel?.text = groupings.name ?? "No Categories Added Yet"
+            
+            cell.backgroundColor = UIColor(hexString: groupings.color ?? "80EC8D")
+            
+        }
         
         return cell
         
@@ -103,6 +112,8 @@ class GroupingTVController: SwipeTableViewController {
             let newCategory = Grouping()
             
             newCategory.name = textField.text!
+            
+            newCategory.color = UIColor.randomFlat.hexValue()
             
             self.save(groupingArray : newCategory)
         }
