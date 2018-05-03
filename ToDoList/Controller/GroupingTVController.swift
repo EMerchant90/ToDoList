@@ -37,16 +37,17 @@ class GroupingTVController: SwipeTableViewController {
         
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
         
-        if let groupings = groupingArray?[indexPath.row] {
+        guard let groupings = groupingArray?[indexPath.row] else {fatalError()}
             
-            cell.textLabel?.text = groupings.name ?? "No Categories Added Yet"
+            cell.textLabel?.text = groupings.name
             
-            cell.backgroundColor = UIColor(hexString: groupings.color ?? "80EC8D")
+            guard let groupingColor = UIColor(hexString: groupings.color) else {fatalError()}
             
-        }
+            cell.backgroundColor = groupingColor
+            
+            cell.textLabel?.textColor = ContrastColorOf(groupingColor, returnFlat: true)
         
-        return cell
-        
+            return cell
     }
     
     //MARK: - TableView Delegate Methods
