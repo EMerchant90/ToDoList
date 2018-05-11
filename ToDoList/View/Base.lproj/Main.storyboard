@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Groupings-->
+        <!--Categories-->
         <scene sceneID="zC0-iz-2T5">
             <objects>
                 <tableViewController id="EHC-9c-apK" customClass="GroupingTVController" customModule="ToDoList" customModuleProvider="target" sceneMemberID="viewController">
@@ -32,7 +32,7 @@
                             <outlet property="delegate" destination="EHC-9c-apK" id="Ou5-lL-Vbl"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Groupings" id="hIW-JP-Hne">
+                    <navigationItem key="navigationItem" title="Categories" id="hIW-JP-Hne">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="oed-rb-GlW">
                             <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
@@ -48,7 +48,7 @@
             </objects>
             <point key="canvasLocation" x="1276" y="125"/>
         </scene>
-        <!--Item-->
+        <!--Items-->
         <scene sceneID="HnM-QW-6Bd">
             <objects>
                 <tableViewController id="w65-YP-GFr" customClass="ToDoListViewController" customModule="ToDoList" customModuleProvider="target" sceneMemberID="viewController">
@@ -79,7 +79,7 @@
                             <outlet property="delegate" destination="w65-YP-GFr" id="zsg-pY-ePk"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Item" id="PQG-OK-9Rd">
+                    <navigationItem key="navigationItem" title="Items" id="PQG-OK-9Rd">
                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="add" id="WZl-B1-Pah">
                             <connections>
                                 <action selector="addButtonPressed:" destination="w65-YP-GFr" id="Wnp-Yw-bLB"/>
